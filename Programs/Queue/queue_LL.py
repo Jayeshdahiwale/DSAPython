@@ -1,3 +1,7 @@
+class IsEmptyError(Exception):
+    def __init__(self, msg):
+        super().__init__(msg)
+
 class QueueLL:
     class Node:
         def __init__(self,element,next = None):
@@ -20,12 +24,33 @@ class QueueLL:
         if self.is_empty():
            self.head = new
         else:
-            self.tail.next = new
+            self.tail = new
             self.size += 1
+            itr = self.head
+            while itr.next:
+                itr = itr.next
+            itr.next = self.tail
             return
         self.tail = new
         self.size += 1
 
     def dequeue(self):
         if self.is_empty():
-            raise 
+            raise IsEmptyError("Queue is empty")
+        result = self.head.element
+        self.head = self.head.next
+        self.size -= 1
+        return result
+
+    
+
+if __name__ == "__main__":
+    queue = QueueLL()
+    queue.enqueue(2)
+    queue.enqueue(3)
+    queue.enqueue(4)
+    print(len(queue))
+    print(queue.dequeue())
+    print(queue.dequeue())
+    print(queue.dequeue())
+    print(len(queue))

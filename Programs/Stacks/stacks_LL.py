@@ -5,8 +5,8 @@ class IsEmptyError(Exception):
 
 class StackLL:
     class Node:
-        def __init__(self,data,next = None):
-            self.data = data
+        def __init__(self,element,next = None):
+            self.element = element
             self.next = next
     def __init__(self):
         self.head = None
@@ -25,14 +25,14 @@ class StackLL:
     def pop(self):
         if self.is_empty():
             raise IsEmptyError("The stack is empty")
-        result = self.head.data
+        result = self.head.element
         self.head = self.head.next
         return result
 
     def top(self):
         if self.is_empty():
             raise IsEmptyError("The stack is empty")
-        return self.head.data
+        return self.head.element
 
     def __str__(self):
         str = "[]"
@@ -41,7 +41,7 @@ class StackLL:
         itr = self.head
         str = "[ "
         while itr:
-            str+= f"{itr.data} "
+            str+= f"{itr.element} "
             itr = itr.next
         str += "]"
         return str

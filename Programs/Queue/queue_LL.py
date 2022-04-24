@@ -42,15 +42,27 @@ class QueueLL:
         self.size -= 1
         return result
 
-    
+    def __str__(self):
+        str = "[]"
+        if self.is_empty():
+            return str
+        itr = self.head
+        str = "[ "
+        while itr:
+            str+= f"{itr.element} "
+            itr = itr.next
+        str += "]"
+        return str
 
 if __name__ == "__main__":
     queue = QueueLL()
     queue.enqueue(2)
     queue.enqueue(3)
     queue.enqueue(4)
+    print(queue)
     print(len(queue))
     print(queue.dequeue())
     print(queue.dequeue())
     print(queue.dequeue())
     print(len(queue))
+    print(queue)
